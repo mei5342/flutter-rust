@@ -1,0 +1,8 @@
+name = "actix-web-docker"
+version = "0.1.0"
+authors = ["Karl San Gabriel"]
+edition = "2020"
+ 
+[dependencies]
+actix-web = "2.0.0"
+actix-rt = "1.1.1"
