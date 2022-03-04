@@ -1,11 +1,8 @@
-FROM ubuntu:20.04
+# 参考：https://qiita.com/kyamamoto9120/items/c391f0ce5050c5ddcc87
+FROM rust:1.56 as develop-stage
 
-RUN apt-get update && apt-get install -y curl
-RUN apt-get install build-essential -y
- 
-RUN mkdir -p /actix-web/www
-WORKDIR /actix-web/www
- 
-COPY target/debug/actix-web-docker /actix-web/www/actix-web-docker
+WORKDIR /app
+RUN cargo install cargo-watch
+COPY . .
 
-CMD ./actix-web-docker
+CMD ["myapp"]
