@@ -1,8 +1,0 @@
-# 参考：https://qiita.com/kyamamoto9120/items/c391f0ce5050c5ddcc87
-FROM rust:1.56 as develop-stage
-
-WORKDIR /app
-RUN cargo install cargo-watch
-COPY . .
-
-CMD ["myapp"]
