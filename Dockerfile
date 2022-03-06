@@ -20,4 +20,7 @@ COPY . .
 RUN cd /usr/src/app && \
     cargo build
 WORKDIR /usr/src/app
+
+EXPOSE 80
+
 CMD ["cargo", "run"]
