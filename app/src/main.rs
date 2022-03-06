@@ -1,12 +1,3 @@
-// wsl2 localhostアクセスエラー 参考：https://qiita.com/snaka/items/a8eee4cfc8f7d733e6ab
-
-// docker実行
-// docker build -t my-rust-app .
-// docker run -it --rm -p 8080:8080 --name my-running-app my-rust-app
-
-// アクセス
-// http://localhost:8080/app/index.html
-
 use actix_web::{web, App, HttpServer, Responder};
 
 async fn index() -> impl Responder {
