@@ -14,7 +14,7 @@ async fn main() -> std::io::Result<()> {
                 .route("/index.html", web::get().to(index)),
         )
     })
-    .bind(("0.0.0.0", 8080))?
+    .bind(("0.0.0.0", 8081))?
     .run()
     .await
 }
