@@ -22,5 +22,3 @@ RUN cargo install cargo-watch
 WORKDIR /usr/src/app
 
 EXPOSE 80
-
-CMD ["/bin/sh", "cargo watch -x run"]

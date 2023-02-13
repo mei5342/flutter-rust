@@ -1,11 +1,7 @@
 # docker実行
-#### ビルド：
+#### 実行
 ```
-docker build -t my-rust-app .
-```
-#### 実行：
-```
-docker run -it --rm -p 8081:8081 --name my-running-app my-rust-app
+docker compose up
 ```
 
 # actix-web
