@@ -17,10 +17,10 @@ WORKDIR /usr/src/
 
 RUN cargo new app --bin
 COPY . .
-RUN cd /usr/src/app && \
-    cargo build
+RUN cd /usr/src/app
+RUN cargo install cargo-watch
 WORKDIR /usr/src/app
 
 EXPOSE 80
 
-CMD ["cargo", "run"]
+CMD ["/bin/sh", "cargo watch -x run"]
