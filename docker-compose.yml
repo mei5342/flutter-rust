@@ -1,6 +1,22 @@
 version: "3.9"
 services:
     app:
-        build: .
-        container_name: "my-rust-app"
+        build: ./app
+        ports:
+          - "8080:8080"
+        container_name: "rust-app-1"
         command: sh -c "cargo watch -x run"
+        networks:
+          - app_network
+
+    app2:
+        build: ./app2
+        ports:
+          - "8081:8081"
+        container_name: "rust-app-2"
+        command: sh -c "cargo watch -x run"
+        networks:
+          - app_network
+networks:
+    app_network:
+      driver: bridge
