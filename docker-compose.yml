@@ -1,22 +1,44 @@
 version: "3.9"
 services:
     app:
+        container_name: "rust-app-1"
         build: ./app
+        volumes:
+          - ./:/usr/src
+        command: sh -c "cargo watch -x run"
         ports:
           - "8080:8080"
-        container_name: "rust-app-1"
-        command: sh -c "cargo watch -x run"
         networks:
           - app_network
 
     app2:
+        container_name: "rust-app-2"
         build: ./app2
+        volumes:
+          - ./:/usr/src
+        command: sh -c "cargo watch -x run"
         ports:
           - "8081:8081"
-        container_name: "rust-app-2"
-        command: sh -c "cargo watch -x run"
         networks:
           - app_network
+
+    frontend:
+      container_name: frontend
+      build: 
+        context: ./frontend
+        args:
+          - ubuntu_version=${UBUNTU_VERSION}
+          - timezone=${TIMEZONE}
+          - web_server_port=${WEB_SERVER_PORT}
+          - app_code_path_container=${APP_CODE_PATH_CONTAINER}
+      tty: true
+      env_file: .env
+      volumes:
+        - ${APP_CODE_PATH_HOST}:${APP_CODE_PATH_CONTAINER}${APP_CODE_CONTAINER_FLAG}
+      ports:
+        - "$WEB_SERVER_PORT:$WEB_SERVER_PORT"
+      networks:
+        - app_network
 networks:
-    app_network:
-      driver: bridge
+  app_network:
+    driver: bridge
