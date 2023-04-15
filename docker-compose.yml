@@ -1,5 +1,20 @@
 version: "3.9"
 services:
+    mysql:
+      image: mysql:8.0.28
+      platform: linux/amd64
+      container_name: mysql
+      ports:
+        - "3306:3306"
+      environment:
+        MYSQL_ROOT_PASSWORD: root
+        MYSQL_DATABASE: development
+        TZ: "Asia/Tokyo"
+      volumes:
+        - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
+      networks:
+        - app_network
+
     app:
         container_name: "rust-app-1"
         build: ./app
@@ -10,6 +25,8 @@ services:
           - "8080:8080"
         networks:
           - app_network
+        depends_on:
+          - mysql
 
     app2:
         container_name: "rust-app-2"
@@ -21,6 +38,8 @@ services:
           - "8081:8081"
         networks:
           - app_network
+        depends_on:
+          - mysql
 
     frontend:
       container_name: frontend
